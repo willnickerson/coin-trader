@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { getToken } from './api';
+import { getToken, getUserData } from './api';
 import qs from 'query-string';
 
 class AuthSuccess extends Component {
   state = {
-    token: null
+    authorizing: true,
+    success: false,
   };
 
   componentDidMount() {
@@ -13,15 +14,25 @@ class AuthSuccess extends Component {
     if(query.code) {
       getToken(query.code)
         .then(data => {
-          debugger;
+          localStorage.setItem('AUTH_TOKEN', data.access_token);
+          this.setState({
+            authorizing: false,
+            success: true
+          });
         })
+        .catch(err => {
+          this.setState({authorizing: false});
+          console.log(err.message);
+        });
     }
   }
   
   render() {
     return (
       <div>
-        Success!
+        {this.state.authorizing && <div>Authorizing...</div>}
+        {!this.state.authorizing && this.state.success && <div>Success!</div>}
+        {!this.state.authorizing && !this.state.success && <div>Oooops something went wrong :(</div>}
       </div>
     );
   }
