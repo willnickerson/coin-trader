@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { Switch, Route, Redirect, NavLink } from 'react-router-dom';
 import Home from './Home';
+import AuthSuccess from './AuthSuccess'
 import About from './About';
 import Account from './Account';
 import Trade from './Trade';
@@ -22,6 +23,7 @@ class App extends Component {
 
         <Switch>
           <Route path='/' exact component={Home}/>
+          <Route path='/authsuccess' component={AuthSuccess}/> 
           <Route path='/trade' component={Trade}/>
           <Route path='/account' component={Account}/>
           <Route path='/about' component={About}/>
