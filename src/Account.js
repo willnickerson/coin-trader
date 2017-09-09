@@ -11,14 +11,15 @@ class Account extends Component {
       .then(data => {
         const userData = data
         this.props.setUser(userData);
+        console.log(this.props.user);
       })
   }
   
   render() {
     return (
       <div>
-        Account
-        {this.props.user.name}
+        <h2>Welcome {this.props.user.name}</h2>
+        <img src={this.props.user.avatar_url}/>
       </div>
     );
   }
