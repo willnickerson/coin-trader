@@ -25,8 +25,19 @@ export const getUserData = () => request
   .get(`${apiUrl}/user`)
   .set('Authorization', `Bearer ${getLocalToken()}`)
   .then(res => {
-    return JSON.parse(res.text).data;
+    return res.body.data;
   });
+
+export const getPrice = (base, currency, price) => request
+    .get(`${apiUrl}/prices/${base}-${currency}/${price}`)
+    .then(res => {
+      return res.body.data
+    });
+
+
+export const getCurrencies = () => request
+    .get(`${apiUrl}/currencies`)
+    .then(res => res.body.data);
 
 
 
