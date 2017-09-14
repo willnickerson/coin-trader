@@ -14,7 +14,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "copy": "rm -rf ../coin-trader-server/public && cp -R ./build ../coin-trader-server/public",
+    "build": "react-scripts build && npm run copy",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }
