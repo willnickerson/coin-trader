@@ -1,7 +1,8 @@
 import { CLIENT_ID, CLIENT_SECRET, REDIRECT_URI } from './consts';
 import request from 'superagent';
 
-const apiUrl = 'https://api.coinbase.com/v2' 
+const coinbaseApiUrl = 'https://api.coinbase.com/v2' ;
+const apiUrl = process.env.API_URL || 'http://localhost:8080/api';
 
 const permissions = 'wallet:accounts:read,wallet:transactions:read,wallet:buys:create,wallet:sells:create';
 
@@ -22,21 +23,21 @@ export const getToken = (code) => {
 }
 
 export const getUserData = () => request
-  .get(`${apiUrl}/user`)
+  .get(`${coinbaseApiUrl}/user`)
   .set('Authorization', `Bearer ${getLocalToken()}`)
   .then(res => {
     return res.body.data;
   });
 
 export const getPrice = (base, currency, price) => request
-    .get(`${apiUrl}/prices/${base}-${currency}/${price}`)
+    .get(`${coinbaseApiUrl}/prices/${base}-${currency}/${price}`)
     .then(res => {
       return res.body.data
     });
 
 
 export const getCurrencies = () => request
-    .get(`${apiUrl}/currencies`)
+    .get(`${coinbaseApiUrl}/currencies`)
     .then(res => res.body.data);
 
 

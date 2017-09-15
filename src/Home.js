@@ -8,15 +8,10 @@ class Home extends Component {
     userToken: null
   }
 
-  // login = () => {
-  //   debugger;
-  //   login().then(data => {
-  //     debugger;
-  //   })
-  // }
   render() {
     return (
       <div>
+        <p>Welcome to Cointrader</p>
         <a href={redirectUrl}> Login with coinbase </a>
       </div>
     );
