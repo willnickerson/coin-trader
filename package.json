@@ -6,6 +6,7 @@
     "coinbase": "^2.0.6",
     "query-string": "^5.0.0",
     "react": "^15.6.1",
+    "react-d3-basic": "^1.6.11",
     "react-dom": "^15.6.1",
     "superagent": "^3.6.0"
   },

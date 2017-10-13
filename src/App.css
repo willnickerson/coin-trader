@@ -22,3 +22,12 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.price-table {
+  margin: 0 auto;
+}
+
+.price-table td {
+  width: 100px;
+  text-align: center;
+}

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
 import { Switch, Route, Redirect, NavLink } from 'react-router-dom';
-import Home from './Home';
-import AuthSuccess from './AuthSuccess'
-import About from './About';
-import Account from './Account';
-import Trade from './Trade';
+import Home from './components/Home';
+import Auth from './components/AuthSuccess'
+import About from './components/About';
+import Account from './components/Account';
+import Trade from './components/Trade';
 
 class App extends Component {
   render() {
@@ -17,13 +17,13 @@ class App extends Component {
             <NavLink to='/'>Home</NavLink>
             <NavLink to='/trade'>Trade</NavLink>
             <NavLink to='/account'>Account</NavLink>
-            <NavLink to='/about'>About</NavLink>           
+            <NavLink to='/about'>About</NavLink>          
           </nav>
         </div>
 
         <Switch>
           <Route path='/' exact component={Home}/>
-          <Route path='/authsuccess' component={AuthSuccess}/> 
+          <Route path='/auth' component={Auth}/>
           <Route path='/trade' component={Trade}/>
           <Route path='/account' component={Account}/>
           <Route path='/about' component={About}/>

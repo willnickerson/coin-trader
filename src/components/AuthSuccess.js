@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getToken, getUserData } from './api';
+import { getToken, getUserData, redirectUrl } from '../api';
 import qs from 'query-string';
 
 class AuthSuccess extends Component {
@@ -10,7 +10,6 @@ class AuthSuccess extends Component {
 
   componentDidMount() {
     const query = qs.parse(this.props.location.search);
-    debugger;
     if(query.code) {
       getToken(query.code)
         .then(data => {
@@ -19,6 +18,7 @@ class AuthSuccess extends Component {
             authorizing: false,
             success: true
           });
+          this.props.history.push('/')
         })
         .catch(err => {
           this.setState({authorizing: false});
@@ -32,7 +32,7 @@ class AuthSuccess extends Component {
       <div>
         {this.state.authorizing && <div>Authorizing...</div>}
         {!this.state.authorizing && this.state.success && <div>Success!</div>}
-        {!this.state.authorizing && !this.state.success && <div>Oooops something went wrong :(</div>}
+        {!this.state.authorizing && !this.state.success && <div>Oooops something went wrong :(<a href={redirectUrl}>try again?</a></div>}
       </div>
     );
   }

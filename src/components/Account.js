@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { getUserData } from './api';
-import { setUser } from './actions/user';
+import { getUserData } from '../api';
+import { setUser } from '../actions/user';
 
 
 class Account extends Component {

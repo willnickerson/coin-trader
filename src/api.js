@@ -3,6 +3,7 @@ import request from 'superagent';
 
 const coinbaseApiUrl = 'https://api.coinbase.com/v2' ;
 const apiUrl = process.env.API_URL || 'http://localhost:8080/api';
+const priceUrl = 'https://api.coindesk.com/v1/bpi/historical/close.json'
 
 const permissions = 'wallet:accounts:read,wallet:transactions:read,wallet:buys:create,wallet:sells:create';
 
@@ -12,15 +13,12 @@ const formTokenUrl = (code) => `https://api.coinbase.com/oauth/token?grant_type=
 
 const getLocalToken = () => localStorage.getItem('AUTH_TOKEN');
 
-export const getToken = (code) => {
-  const url = formTokenUrl(code);
-  return fetch(url, { method: 'POST' })
-    .then(res => {
-      const data = res.json();
-      return data;
-    })
-    .catch(err => err.message);
-}
+export const getToken = code => request
+  .post('/auth/verify')
+  .send({ code })
+  .then(res => {
+    return res.body;
+  })
 
 export const getUserData = () => request
   .get(`${coinbaseApiUrl}/user`)
@@ -34,6 +32,10 @@ export const getPrice = (base, currency, price) => request
     .then(res => {
       return res.body.data
     });
+
+export const getHistoricalPrices = (currency, startTime) => request
+    .get(`${priceUrl}?currency=${currency}`)
+    .then(res => JSON.parse(res.text));
 
 
 export const getCurrencies = () => request
